@@ -1,3 +1,5 @@
+import time
+from selenium.webdriver.common.keys import Keys
 from amazon_config import(
     get_web_driver_options,
     get_chrome_web_driver,
@@ -29,6 +31,7 @@ class AmazonAPI:
         print("Starting script...")
         print(f"Looking for {self.search_term} products...")
         links = self.get_products_links()
+        time.sleep(3)
         if not links:
             print("Stopped script")
             return
@@ -36,7 +39,13 @@ class AmazonAPI:
         self.driver.quit()
 
     def get_products_links(self):
-        self.driver.get(self.base_url)    
+        self.driver.get(self.base_url)
+        element = self.driver.find_element_by_id("twotabsearchtextbox")
+        element.send_keys(self.search_term)
+        element.send_keys(Keys.ENTER)
+        time.sleep(2)
+        self.driver.get(f'{self.driver.current_url}{self.price_filter}')
+
 
 
 if __name__ == '__main__':
