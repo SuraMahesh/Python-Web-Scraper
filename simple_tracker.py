@@ -24,7 +24,23 @@ class AmazonAPI:
         self.driver = get_chrome_web_driver(options)
         self.currency = currency
         self.price_filter = f"&rh=p_36%3A{filters['min']}00-{filters['max']}00"
-        pass
+
+    def run(self):    
+        print("Starting script...")
+        print(f"Looking for {self.search_term} products...")
+        links = self.get_products_links()
+        if not links:
+            print("Stopped script")
+            return
+
+        self.driver.quit()
+
+    def get_products_links(self):
+        self.driver.get(self.base_url)    
+
 
 if __name__ == '__main__':
     print("YOOO!!!")
+    amazon = AmazonAPI(NAME, FILTERS, BASE_URL, CURRENCY)
+    amazon.run()
+

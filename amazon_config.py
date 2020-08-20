@@ -21,6 +21,6 @@ def set_ignore_cetificate_error(options):
     options.add_argument('--ignore-certificate-errors')
 
 def set_browser_as_incognito(options):
-    options.add_argumen('--incognito')      
+    options.add_argument('--incognito')      
 
 
