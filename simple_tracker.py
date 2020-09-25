@@ -46,7 +46,7 @@ class AmazonAPI:
 
     def get_products_links(self):
         self.driver.get(self.base_url)
-        element = self.driver.find_element_by_id("twotabsearchtextbox")
+        element = self.driver.find_element_by_id('//*[@id="twotabsearchtextbox"]')
         element.send_keys(self.search_term)
         element.send_keys(Keys.ENTER)
         time.sleep(2)
@@ -56,7 +56,9 @@ class AmazonAPI:
         links = []
         try:
             results = result_list[0].find_elements_by_xpath(
+                "//div[1]/div[2]/div/span[3]"
             )
+            
             links = [link.get_attribute('href') for link in results]
             return links
         except Exception as e:
