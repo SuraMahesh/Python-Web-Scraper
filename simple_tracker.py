@@ -34,29 +34,33 @@ class AmazonAPI:
         print("Starting script...")
         print(f"Looking for {self.search_term} products...")
         links = self.get_products_links()
-        if not links:
-            print("Stopped script")
-            return
-        print(f"Got {len(links)} links to products...")
-        print("Getting into about produts...")
-        products = self.get_products_info(links)
-        print(f"Got info about {len(products)} products...")
-        self.driver.quit()
-        return products
+        print(links)
+        # if not links:
+        #     print("Stopped script")
+        #     return
+        # print(f"Got {len(links)} links to products...")
+        # print("Getting into about produts...")
+        # products = self.get_products_info(links)
+        # print(f"Got info about {len(products)} products...")
+        # self.driver.quit()
+        # return products
+
 
     def get_products_links(self):
         self.driver.get(self.base_url)
-        element = self.driver.find_element_by_id('//*[@id="twotabsearchtextbox"]')
+        element = self.driver.find_element_by_id("twotabsearchtextbox")
         element.send_keys(self.search_term)
         element.send_keys(Keys.ENTER)
         time.sleep(2)
         self.driver.get(f'{self.driver.current_url}{self.price_filter}')
         result_list = self.driver.find_elements_by_class_name('s-result-list')
+        print(f"Our url {self.driver.current_url}")
+        time.sleep(2)
 
         links = []
         try:
             results = result_list[0].find_elements_by_xpath(
-                "//div[1]/div[2]/div/span[3]"
+                "//div/span/div/div/div[2]/div[2]/div/div[1]/div/div/div[1]/h2/a"
             )
             
             links = [link.get_attribute('href') for link in results]
