@@ -82,10 +82,10 @@ class AmazonAPI:
         element = self.driver.find_element_by_xpath('//*[@id="twotabsearchtextbox"]')
         element.send_keys(self.search_term)
         element.send_keys(Keys.ENTER)
-        time.sleep(2)  # wait to load page
+        time.sleep(2)  
         self.driver.get(f'{self.driver.current_url}{self.price_filter}')
         print(f"Our url: {self.driver.current_url}")
-        time.sleep(2)  # wait to load page
+        time.sleep(2)  
         result_list = self.driver.find_elements_by_class_name('s-result-list')
         links = []
         try:
