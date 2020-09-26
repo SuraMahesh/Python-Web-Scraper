@@ -36,7 +36,7 @@ class GenerateReport:
         print("Creating report...")
         with open(f'{DIRECTORY}/{file_name}.json', 'w') as f:
             json.dump(report, f)
-        print("Done...")
+        print("Complete!!!")
 
     @staticmethod
     def get_now():
@@ -188,6 +188,6 @@ class AmazonAPI:
 
 
 if __name__ == '__main__':
-    am = AmazonAPI(NAME, FILTERS, BASE_URL, CURRENCY)
-    data = am.run()
+    amozon = AmazonAPI(NAME, FILTERS, BASE_URL, CURRENCY)
+    data = amozon.run()
     GenerateReport(NAME, FILTERS, BASE_URL, CURRENCY, data)
